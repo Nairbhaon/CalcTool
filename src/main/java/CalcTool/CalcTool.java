@@ -1,3 +1,5 @@
+package CalcTool;
+
 import javax.swing.*;
 public class CalcTool
 {
