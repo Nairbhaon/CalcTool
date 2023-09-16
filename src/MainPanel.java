@@ -65,12 +65,11 @@ public class MainPanel extends JPanel
                     }
                     else if (token.isEmpty())
                     {
-                        output.setText("Invalid Token");
+                        output.setText("No Token received");
                     }
                     else
                     {
-                        setOutputMessage(inputMessage);
-                        output.setText(outputMessage);
+                        output.setText(ChatInterface.explainEquation(token, inputPrompt));
                     }
                 } 
                 catch (Exception e1) 
@@ -382,45 +381,4 @@ public class MainPanel extends JPanel
         buttonPanel.add(backspace);
         buttonPanel.add(clear);
     }
-
-    public String getInput()
-    {
-        return inputMessage;
-    }
-
-    public void setInputPrompt(String str)
-    {
-        inputPrompt = str;
-    }
-
-    public String getInputPrompt()
-    {
-        return inputPrompt;
-    }
-
-    public void setInput(String str)
-    {
-        inputMessage = str;
-    }
-
-    public String getToken()
-    {
-        return token;
-    }
-
-    public void setToken(String str)
-    {
-        token = str;
-    }
-
-    public String getOutputMessage()
-    {
-        return outputMessage;
-    }
-
-    public void setOutputMessage(String str)
-    {
-        outputMessage = str;
-    }
-    
 }

@@ -37,8 +37,7 @@ public class ChatInterface {
             }
             return choices.get(0).getMessage().getContent();
         } catch (Exception e){
-            System.out.println("Request failed. Check API key and rate limits.");
-            return null;
+            return "Request failed. Check API key and rate limits.";
         }
 
     }
