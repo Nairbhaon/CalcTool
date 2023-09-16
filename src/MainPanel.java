@@ -32,7 +32,7 @@ public class MainPanel extends JPanel
 
         //button 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(0, 10));
+        buttonPanel.setLayout(new GridLayout(0, 7));
         this.add(Box.createRigidArea(new Dimension(5, 20)));
         this.add(buttonPanel);
 
@@ -52,18 +52,18 @@ public class MainPanel extends JPanel
         this.add(outputPanel);
 
         //submit button
-        JButton submit = new JButton("submit");
-        submit.addActionListener(new ActionListener(){ 
+        JButton enter = new JButton("Enter");
+        enter.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) 
             { 
                 try 
                 {
                     token = tokenInput.getText();
-                    if (inputMessage.equals(""))
+                    if (inputMessage.isEmpty())
                     {
                         output.setText("No input received");
                     }
-                    else if (token.equals(""))
+                    else if (token.isEmpty())
                     {
                         output.setText("Invalid Token");
                     }
@@ -79,7 +79,7 @@ public class MainPanel extends JPanel
                 }
             }
         });
-        inputPanel.add(submit,BorderLayout.LINE_END);
+        inputPanel.add(enter,BorderLayout.LINE_END);
 
         JButton one = new JButton("1");
         one.addActionListener(new ActionListener(){ 
@@ -319,6 +319,49 @@ public class MainPanel extends JPanel
             }
         });
 
+        JButton backspace = new JButton("\u232B");
+        backspace.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    if(inputMessage.length() > 1)
+                    {
+                        inputMessage = inputMessage.substring(0, inputMessage.length() - 1);
+                        inputPrompt += inputPrompt.substring(0, inputPrompt.length() - 1);     //fix later
+                        input.setText(inputMessage);
+                    }
+                    else if(inputMessage.length() == 1)
+                    {
+                        inputMessage = "";
+                        inputPrompt += "";     //fix later
+                        input.setText("Please enter your question");
+                    }
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton clear = new JButton("Clear");
+        clear.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage = "";
+                    inputPrompt += "";
+                    input.setText("Please enter your question");
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         buttonPanel.add(one);
         buttonPanel.add(two);
         buttonPanel.add(three);
@@ -336,6 +379,8 @@ public class MainPanel extends JPanel
         buttonPanel.add(nine);
 
         buttonPanel.add(zero);
+        buttonPanel.add(backspace);
+        buttonPanel.add(clear);
     }
 
     public String getInput()
