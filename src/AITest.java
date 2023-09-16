@@ -21,14 +21,21 @@ public class AITest {
         messageList.add(new ChatMessage("user",prompt));
 
         OpenAiService service = new OpenAiService(token);
+
         ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()
                 .model("gpt-3.5-turbo")
                 .maxTokens(256)
                 .messages(messageList)
                 .build();
-        List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
-        for (ChatCompletionChoice c: choices) {
-            System.out.println(c.getMessage().getContent());
+        try {
+            List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
+            for (ChatCompletionChoice c: choices) {
+                System.out.println(c.getMessage().getContent());
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid API Key");
+            //throw new RuntimeException(e);
         }
+
     }
 }

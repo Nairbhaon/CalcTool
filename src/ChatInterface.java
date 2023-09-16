@@ -29,11 +29,17 @@ public class ChatInterface {
                 .maxTokens(256)
                 .messages(messageList)
                 .build();
-        List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
-        System.out.println("Results:");
-        for (ChatCompletionChoice c: choices) {
-            System.out.println(c);
+        try {
+            List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
+            System.out.println("Results:");
+            for (ChatCompletionChoice c: choices) {
+                System.out.println(c);
+            }
+            return choices.get(0).getMessage().getContent();
+        } catch (Exception e){
+            System.out.println("Request failed. Check API key and rate limits.");
+            return null;
         }
-        return choices.get(0).getMessage().getContent();
+
     }
 }
