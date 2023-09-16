@@ -1,5 +1,5 @@
 import javax.swing.*;
-public class calcTool
+public class CalcTool
 {
     public static void main(String[] args)
     {
@@ -11,7 +11,7 @@ public class calcTool
         window.setSize(500, 400);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
-        window.add(new mainPanel());
+        window.add(new MainPanel());
         window.setVisible(true);
     }    
 }

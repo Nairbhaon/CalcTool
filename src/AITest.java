@@ -36,6 +36,5 @@ public class AITest {
             System.out.println("Invalid API Key");
             //throw new RuntimeException(e);
         }
-
     }
 }
