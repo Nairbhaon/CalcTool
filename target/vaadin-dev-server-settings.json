@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "C:/Users/shoyo/Documents/GitHub/CalcTool/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/shoyo/Documents/GitHub/CalcTool/./frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/shoyo/Documents/GitHub/CalcTool/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\shoyo\\Documents\\GitHub\\CalcTool\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\shoyo\\Documents\\GitHub\\CalcTool\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/shoyo/Documents/GitHub/CalcTool/src/main/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/shoyo/Documents/GitHub/CalcTool/src/main/dev-bundle/config",
+  "jarResourcesFolder": "C:/Users/shoyo/Documents/GitHub/CalcTool/./frontend/generated/jar-resources",
+  "themeName": "",
+  "clientServiceWorkerSource": "C:\\Users\\shoyo\\Documents\\GitHub\\CalcTool\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
