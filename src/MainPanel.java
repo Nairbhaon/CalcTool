@@ -3,6 +3,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+
 public class MainPanel extends JPanel
 {
     private String inputMessage = "";
@@ -16,10 +20,40 @@ public class MainPanel extends JPanel
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         //input
-        JTextArea input = new JTextArea("Please enter your question");
+        JTextArea input = new JTextArea("");
         input.setEditable(true);
         input.setPreferredSize(new Dimension(460, 40));
         input.setBorder(BorderFactory.createLineBorder(Color.black));
+        input.getDocument().addDocumentListener(new DocumentListener() {
+
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    changed(e);
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    changed(e);
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                try {
+                    changed(e);
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            public void changed(DocumentEvent e) throws BadLocationException {
+                inputMessage = e.getDocument().getText(0,e.getDocument().getLength());
+                inputPrompt = e.getDocument().getText(0,e.getDocument().getLength());
+            }
+        });
         this.add(input);
 
         //button 
@@ -317,7 +351,7 @@ public class MainPanel extends JPanel
                 {
                     inputMessage = "";
                     inputPrompt += "";
-                    input.setText("Please enter your question");
+                    input.setText("");
                 }
                 catch (Exception e1)
                 {
