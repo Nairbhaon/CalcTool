@@ -15,9 +15,12 @@ public class MainPanel extends JPanel
 
     public MainPanel()
     {
-        //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+        JLabel inputInstruction = new JLabel("Please enter your question");
+        inputInstruction.setPreferredSize(new Dimension(460, 20));
+        this.add(inputInstruction);
 
         //input
         JTextArea input = new JTextArea("");
@@ -25,7 +28,6 @@ public class MainPanel extends JPanel
         input.setPreferredSize(new Dimension(460, 40));
         input.setBorder(BorderFactory.createLineBorder(Color.black));
         input.getDocument().addDocumentListener(new DocumentListener() {
-
             public void insertUpdate(DocumentEvent e) {
                 try {
                     changed(e);
@@ -56,27 +58,31 @@ public class MainPanel extends JPanel
         });
         this.add(input);
 
-        //button 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(460, 120));
         buttonPanel.setLayout(new GridLayout(0, 7));
-        this.add(Box.createRigidArea(new Dimension(5, 20)));
+        this.add(Box.createRigidArea(new Dimension(5, 10)));
         this.add(buttonPanel);
 
-        //token input
-        JTextArea tokenInput = new JTextArea("Enter API Key here", 1, 1);
+        JLabel tokenInstruction = new JLabel("Enter API Key here");
+        tokenInstruction.setPreferredSize(new Dimension(460, 20));
+        this.add(Box.createRigidArea(new Dimension(5, 10)));
+        this.add(tokenInstruction);
+
+        JTextArea tokenInput = new JTextArea();
         tokenInput.setBorder(BorderFactory.createLineBorder(Color.black));
+        tokenInput.setPreferredSize(new Dimension(460, 20));
         JPanel tokenPanel = new JPanel(new GridLayout(1,1));
         tokenPanel.add(tokenInput);
-        this.add(Box.createRigidArea(new Dimension(5, 20)));
         this.add(tokenPanel);
 
-        //output
         JTextArea output = new JTextArea("Output will be displayed here", 1, 1);
         output.setEditable(false);
         JPanel test = new JPanel();
         JScrollPane scroll = new JScrollPane(output);
         scroll.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.add(Box.createRigidArea(new Dimension(5, 20)));
+        this.add(Box.createRigidArea(new Dimension(5, 10)));
+        scroll.setPreferredSize(new Dimension(460, 20));
         this.add(scroll);
 
         JButton one = new JButton("1");
@@ -377,7 +383,6 @@ public class MainPanel extends JPanel
                     }
                     else
                     {
-                        output.setText("Please wait for the answer to be generated");
                         output.setText(ChatInterface.explainEquation(token, inputPrompt));
                     }
                 }
