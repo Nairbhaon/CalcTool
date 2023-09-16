@@ -8,27 +8,19 @@ public class MainPanel extends JPanel
     private String inputMessage = "";
     private String inputPrompt = "";
     private String token = "";
-    private String outputMessage = "";
 
     public MainPanel()
     {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         //input
-        JLabel instruction = new JLabel("Here is the instruction");
-        this.add(instruction);
-        instruction.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        //input
-        JLabel input = new JLabel("Please enter your question", SwingConstants.CENTER);
-        JPanel inputPanel = new JPanel(new BorderLayout());
-        inputPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        inputPanel.add(input);
-        inputPanel.setMaximumSize(new Dimension(500, 200));
-        
-        this.add(Box.createRigidArea(new Dimension(5, 20)));
-        this.add(inputPanel);
+        JTextArea input = new JTextArea("Please enter your question");
+        input.setEditable(true);
+        input.setPreferredSize(new Dimension(460, 40));
+        input.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(input);
 
         //button 
         JPanel buttonPanel = new JPanel();
@@ -37,48 +29,21 @@ public class MainPanel extends JPanel
         this.add(buttonPanel);
 
         //token input
-        JTextField tokenInput = new JTextField();
+        JTextArea tokenInput = new JTextArea("Enter API Key here", 1, 1);
         tokenInput.setBorder(BorderFactory.createLineBorder(Color.black));
+        JPanel tokenPanel = new JPanel(new GridLayout(1,1));
+        tokenPanel.add(tokenInput);
         this.add(Box.createRigidArea(new Dimension(5, 20)));
-        this.add(tokenInput);
+        this.add(tokenPanel);
 
         //output
-        JLabel output = new JLabel("Output will be displaced Here");
-        JPanel outputPanel = new JPanel();
-        outputPanel.add(output);
-        outputPanel.setMaximumSize(new Dimension(500, 100));
-        outputPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        JTextArea output = new JTextArea("Output will be displayed here", 1, 1);
+        output.setEditable(false);
+        JPanel test = new JPanel();
+        JScrollPane scroll = new JScrollPane(output);
+        scroll.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(Box.createRigidArea(new Dimension(5, 20)));
-        this.add(outputPanel);
-
-        //submit button
-        JButton enter = new JButton("Enter");
-        enter.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) 
-            { 
-                try 
-                {
-                    token = tokenInput.getText();
-                    if (inputMessage.isEmpty())
-                    {
-                        output.setText("No input received");
-                    }
-                    else if (token.isEmpty())
-                    {
-                        output.setText("No Token received");
-                    }
-                    else
-                    {
-                        output.setText(ChatInterface.explainEquation(token, inputPrompt));
-                    }
-                } 
-                catch (Exception e1) 
-                {
-                    e1.printStackTrace();
-                }
-            }
-        });
-        inputPanel.add(enter,BorderLayout.LINE_END);
+        this.add(scroll);
 
         JButton one = new JButton("1");
         one.addActionListener(new ActionListener(){ 
@@ -327,13 +292,13 @@ public class MainPanel extends JPanel
                     if(inputMessage.length() > 1)
                     {
                         inputMessage = inputMessage.substring(0, inputMessage.length() - 1);
-                        inputPrompt += inputPrompt.substring(0, inputPrompt.length() - 1);     //fix later
+                        inputPrompt = inputPrompt.substring(0, inputPrompt.length() - 1);     //fix later
                         input.setText(inputMessage);
                     }
                     else if(inputMessage.length() == 1)
                     {
                         inputMessage = "";
-                        inputPrompt += "";     //fix later
+                        inputPrompt += "";
                         input.setText("Please enter your question");
                     }
                 }
@@ -361,6 +326,34 @@ public class MainPanel extends JPanel
             }
         });
 
+        JButton enter = new JButton("Enter");
+        enter.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    token = tokenInput.getText();
+                    if (inputMessage.isEmpty())
+                    {
+                        output.setText("No input received");
+                    }
+                    else if (token.isEmpty())
+                    {
+                        output.setText("No Token received");
+                    }
+                    else
+                    {
+                        output.setText("Please wait for the answer to be generated");
+                        output.setText(ChatInterface.explainEquation(token, inputPrompt));
+                    }
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         buttonPanel.add(one);
         buttonPanel.add(two);
         buttonPanel.add(three);
@@ -380,5 +373,6 @@ public class MainPanel extends JPanel
         buttonPanel.add(zero);
         buttonPanel.add(backspace);
         buttonPanel.add(clear);
+        buttonPanel.add(enter);
     }
 }
