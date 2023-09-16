@@ -78,11 +78,13 @@ public class MainPanel extends JPanel
 
         JTextArea output = new JTextArea("Output will be displayed here", 1, 1);
         output.setEditable(false);
+        output.setLineWrap(true);
+        output.setWrapStyleWord(true);
         JPanel test = new JPanel();
         JScrollPane scroll = new JScrollPane(output);
         scroll.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(Box.createRigidArea(new Dimension(5, 10)));
-        scroll.setPreferredSize(new Dimension(460, 20));
+        scroll.setPreferredSize(new Dimension(460, 80));
         this.add(scroll);
 
         JButton one = new JButton("1");
