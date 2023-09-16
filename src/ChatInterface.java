@@ -6,7 +6,16 @@ import com.theokanning.openai.service.OpenAiService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains methods for interacting with OpenAI models
+ */
 public class ChatInterface {
+    /**
+     * Explains an equation
+     * @param token API token from an OpenAI account
+     * @param equation Text equation to be evaluated or explained
+     * @return The model's response
+     */
     public static String explainEquation(String token, String equation){
         OpenAiService service = new OpenAiService(token);
 
