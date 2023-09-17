@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Contains methods for interacting with OpenAI models
+ * @author Noah Durand
+ * @version 1.0
  */
 public class ChatInterface {
     /**
