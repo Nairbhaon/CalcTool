@@ -1,4 +1,10 @@
+package CalcTool;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import javax.swing.*;
+
+@SpringBootApplication
 public class CalcTool
 {
     public static void main(String[] args) throws Exception {

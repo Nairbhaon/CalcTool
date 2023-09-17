@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "C:/Users/admin/Github/CalcTool/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/admin/Github/CalcTool/./frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/admin/Github/CalcTool/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\admin\\Github\\CalcTool\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\admin\\Github\\CalcTool\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/admin/Github/CalcTool/src/main/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/admin/Github/CalcTool/src/main/dev-bundle/config",
+  "jarResourcesFolder": "C:/Users/admin/Github/CalcTool/./frontend/generated/jar-resources",
+  "themeName": "",
+  "clientServiceWorkerSource": "C:\\Users\\admin\\Github\\CalcTool\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
