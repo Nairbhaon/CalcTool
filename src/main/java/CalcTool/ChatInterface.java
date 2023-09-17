@@ -23,7 +23,7 @@ public class ChatInterface {
 
         List<ChatMessage> messageList = new ArrayList<ChatMessage>();
         messageList.add(new ChatMessage("system","You are a helpful math assistant that explains equations and their " +
-                "solutions in an easily understandable way."));
+                "solutions in an easily understandable but still concise way."));
         messageList.add(new ChatMessage("user","Explain the equation " + equation + "."));
 
         ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()

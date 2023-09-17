@@ -1,7 +1,11 @@
 package demo;
 
+import CalcTool.ChatInterface;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -12,6 +16,9 @@ public class MainView extends VerticalLayout {
     public MainView() {
         // Initialize equation string
         final String[] equationString = {""};
+        final String[] token = {""};
+
+        //region Initializations
         // Initialize all the buttons required
         // Numbers
         var zero = new Button("0");
@@ -87,9 +94,8 @@ public class MainView extends VerticalLayout {
 
         // Initialize all the text fields
         // Equation Input Text Field
-        TextArea equationInputArea = new TextArea();
+        TextArea equationInputArea = new TextArea("Equation");
         equationInputArea.setWidthFull();
-        equationInputArea.setLabel("Equation");
         equationInputArea.setPlaceholder("Please Input your Equation Here");
         equationInputArea.setTooltipText("Type Equation Here");
         equationInputArea.setClearButtonVisible(true);
@@ -104,6 +110,9 @@ public class MainView extends VerticalLayout {
         tokenInputArea.setClearButtonVisible(true);
         tokenInputArea.setMinHeight("50px");
         tokenInputArea.setMaxHeight("75px");
+        tokenInputArea.addValueChangeListener( e -> {
+            token[0] = tokenInputArea.getValue();
+        });
 
         // Equation Output Text Field
         TextArea equationOutputArea = new TextArea();
@@ -115,14 +124,27 @@ public class MainView extends VerticalLayout {
         equationOutputArea.setMaxHeight("150px");
         equationOutputArea.setReadOnly(true);
 
+        //endregion
+
         // Website
         // Create a vertical layout
         VerticalLayout mainContent = new VerticalLayout();
         mainContent.setSizeFull();
 
+        // Button for enter
+        Button enterPrompt = new Button("Submit!");
+        enterPrompt.addClickListener(e ->{
+            equationOutputArea.setValue(ChatInterface.explainEquation(token[0], equationString[0]));
+        });
+        enterPrompt.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        enterPrompt.addThemeVariants(ButtonVariant.LUMO_LARGE);
+        enterPrompt.setHeight("80px");
+
+
         // Create horizontal layout
         H1 title = new H1("MathGPT");
-        HorizontalLayout equationInput = new HorizontalLayout(equationInputArea);
+        HorizontalLayout equationInput = new HorizontalLayout(equationInputArea, enterPrompt);
+        equationInput.setAlignSelf(Alignment.END, enterPrompt);
         equationInput.setWidthFull();
         HorizontalLayout inputFieldLineOne = new HorizontalLayout(seven, eight, nine, plus, minus, times, divide, equals, backspace);
         HorizontalLayout inputFieldLineTwo = new HorizontalLayout(four, five, six, less, greater, lessEqual, greaterEqual, power, abs);
@@ -135,6 +157,7 @@ public class MainView extends VerticalLayout {
         HorizontalLayout equationOutput = new HorizontalLayout(equationOutputArea);
         equationOutput.setWidthFull();
 
+        //region Button Listeners
         // Click Event Addition
         zero.addClickListener(e -> {
             equationString[0] += "0";
@@ -225,7 +248,45 @@ public class MainView extends VerticalLayout {
             equationInputArea.setValue(equationString[0]);
         });
         nthRoot.addClickListener(e -> {
-            equationString[0] += " root of ";
+            switch(equationString[0].charAt(equationString[0].length() - 1))
+            {
+                case '1':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "st root of ";
+                    }
+                    else
+                        equationString[0] += "st root of ";
+                    break;
+                case '2':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "nd root of ";
+                    }
+                    else
+                        equationString[0] += "nd root of ";
+                    break;
+                case '3':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "rd root of ";
+                    }
+                    else
+                        equationString[0] += "rd root of ";
+                    break;
+                default:
+                    equationString[0] += "th root of ";
+            }
+
             equationInputArea.setValue(equationString[0]);
         });
         power.addClickListener(e -> {
@@ -349,6 +410,8 @@ public class MainView extends VerticalLayout {
             equationInputArea.setValue(equationString[0]);
         });
 
+        //endregion
+
 
         equationInputArea.addValueChangeListener(e -> {
             equationString[0] = e.getValue();
@@ -357,7 +420,8 @@ public class MainView extends VerticalLayout {
 
         // Set component alignment in the vertical layout
         mainContent.setAlignItems(Alignment.CENTER);
-        mainContent.add(title, equationInput, inputFieldLineOne, inputFieldLineTwo, inputFieldLineThree, inputFieldLineFour, inputFieldLineFive, inputFieldLineSix, tokenInput, equationOutput);
+        mainContent.add(title);
+        mainContent.add(equationInput, inputFieldLineOne, inputFieldLineTwo, inputFieldLineThree, inputFieldLineFour, inputFieldLineFive, inputFieldLineSix, tokenInput, equationOutput);
 
 
         add(mainContent);
