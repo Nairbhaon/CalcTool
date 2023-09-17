@@ -7,26 +7,37 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 public class MainPanel extends JPanel
 {
     private String inputMessage = "";
-    private String inputPrompt = "";
     private String token = "";
 
-    public MainPanel()
+    private Clip clip;
+
+    public MainPanel() throws Exception
     {
+        setClip("Kahoot.wav");
+
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         JLabel inputInstruction = new JLabel("Please enter your question");
-        inputInstruction.setPreferredSize(new Dimension(460, 20));
+        inputInstruction.setPreferredSize(new Dimension(760, 20));
         this.add(inputInstruction);
 
         //input
         JTextArea input = new JTextArea("");
         input.setEditable(true);
-        input.setPreferredSize(new Dimension(460, 40));
+        input.setFont(new Font("TimesRoman", Font.BOLD, 24));
+        input.setPreferredSize(new Dimension(640, 40));
         input.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(input);
+
         input.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 try {
@@ -53,25 +64,42 @@ public class MainPanel extends JPanel
             }
             public void changed(DocumentEvent e) throws BadLocationException {
                 inputMessage = e.getDocument().getText(0,e.getDocument().getLength());
-                inputPrompt = e.getDocument().getText(0,e.getDocument().getLength());
             }
         });
         this.add(input);
 
+        JButton clear = new JButton("Clear");
+        clear.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage = "";
+                    input.setText("");
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        clear.setPreferredSize(new Dimension(110, 40));
+        this.add(clear);
+
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setPreferredSize(new Dimension(460, 120));
-        buttonPanel.setLayout(new GridLayout(0, 7));
+        buttonPanel.setPreferredSize(new Dimension(760, 280));
+        buttonPanel.setLayout(new GridLayout(0, 9));
         this.add(Box.createRigidArea(new Dimension(5, 10)));
         this.add(buttonPanel);
 
         JLabel tokenInstruction = new JLabel("Enter API Key here");
-        tokenInstruction.setPreferredSize(new Dimension(460, 20));
+        tokenInstruction.setPreferredSize(new Dimension(760, 20));
         this.add(Box.createRigidArea(new Dimension(5, 10)));
         this.add(tokenInstruction);
 
         JTextArea tokenInput = new JTextArea();
         tokenInput.setBorder(BorderFactory.createLineBorder(Color.black));
-        tokenInput.setPreferredSize(new Dimension(460, 20));
+        tokenInput.setPreferredSize(new Dimension(760, 20));
         JPanel tokenPanel = new JPanel(new GridLayout(1,1));
         tokenPanel.add(tokenInput);
         this.add(tokenPanel);
@@ -80,11 +108,10 @@ public class MainPanel extends JPanel
         output.setEditable(false);
         output.setLineWrap(true);
         output.setWrapStyleWord(true);
-        JPanel test = new JPanel();
         JScrollPane scroll = new JScrollPane(output);
         scroll.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(Box.createRigidArea(new Dimension(5, 10)));
-        scroll.setPreferredSize(new Dimension(460, 80));
+        scroll.setPreferredSize(new Dimension(760, 80));
         this.add(scroll);
 
         JButton one = new JButton("1");
@@ -94,7 +121,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "1";
-                    inputPrompt += "1";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -111,7 +137,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "2";
-                    inputPrompt += "2";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -128,7 +153,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "3";
-                    inputPrompt += "3";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -145,7 +169,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "4";
-                    inputPrompt += "4";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -162,7 +185,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "5";
-                    inputPrompt += "5";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -179,7 +201,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "6";
-                    inputPrompt += "6";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -196,7 +217,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "7";
-                    inputPrompt += "7";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -213,7 +233,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "8";
-                    inputPrompt += "8";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -230,7 +249,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "9";
-                    inputPrompt += "9";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -247,7 +265,6 @@ public class MainPanel extends JPanel
                 try 
                 {
                     inputMessage += "0";
-                    inputPrompt += "0";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -263,8 +280,7 @@ public class MainPanel extends JPanel
             { 
                 try 
                 {
-                    inputMessage += "+";
-                    inputPrompt += "+";
+                    inputMessage += " + ";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -280,8 +296,7 @@ public class MainPanel extends JPanel
             { 
                 try 
                 {
-                    inputMessage += "-";
-                    inputPrompt += "-";
+                    inputMessage += " - ";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -297,8 +312,7 @@ public class MainPanel extends JPanel
             { 
                 try 
                 {
-                    inputMessage += "\u00D7";
-                    inputPrompt += "\u00D7";
+                    inputMessage += " \u00D7 ";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -314,8 +328,7 @@ public class MainPanel extends JPanel
             { 
                 try 
                 {
-                    inputMessage += "\u00F7";
-                    inputPrompt += "\u00F7";
+                    inputMessage += " \u00F7 ";
                     input.setText(inputMessage);
                 } 
                 catch (Exception e1) 
@@ -331,35 +344,11 @@ public class MainPanel extends JPanel
             {
                 try
                 {
-                    if(inputMessage.length() > 1)
+                    if(inputMessage.length() > 0)
                     {
                         inputMessage = inputMessage.substring(0, inputMessage.length() - 1);
-                        inputPrompt = inputPrompt.substring(0, inputPrompt.length() - 1);     //fix later
                         input.setText(inputMessage);
                     }
-                    else if(inputMessage.length() == 1)
-                    {
-                        inputMessage = "";
-                        inputPrompt += "";
-                        input.setText("Please enter your question");
-                    }
-                }
-                catch (Exception e1)
-                {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        JButton clear = new JButton("Clear");
-        clear.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                try
-                {
-                    inputMessage = "";
-                    inputPrompt += "";
-                    input.setText("");
                 }
                 catch (Exception e1)
                 {
@@ -385,7 +374,7 @@ public class MainPanel extends JPanel
                     }
                     else
                     {
-                        output.setText(ChatInterface.explainEquation(token, inputPrompt));
+                        output.setText(ChatInterface.explainEquation(token, inputMessage));
                     }
                 }
                 catch (Exception e1)
@@ -395,25 +384,276 @@ public class MainPanel extends JPanel
             }
         });
 
-        buttonPanel.add(one);
-        buttonPanel.add(two);
-        buttonPanel.add(three);
-        buttonPanel.add(plus);
-        buttonPanel.add(minus);
-        buttonPanel.add(multiply);
-        buttonPanel.add(divide);
+        JButton root = new JButton("\u221A");
+        root.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "\u221A";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
-        buttonPanel.add(four);
-        buttonPanel.add(five);
-        buttonPanel.add(six);
+        JButton rootOf = new JButton("n\u221Ax");
+        rootOf.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " root of ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton equal = new JButton("=");
+        equal.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " = ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton less = new JButton("<");
+        less.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " < ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton larger = new JButton(">");
+        larger.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " > ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton lessEqual = new JButton("<=");
+        lessEqual.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " <= ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton largerEqual = new JButton(">=");
+        largerEqual.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " >= ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton power = new JButton("^");
+        power.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "^";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton absolute = new JButton("|");
+        absolute.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "|";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton leftPar = new JButton("(");
+        leftPar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "(";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton rightPar = new JButton(")");
+        rightPar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += ")";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton logn = new JButton("log n");
+        logn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "log of _ in base _";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton ln = new JButton("ln");
+        ln.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " ln ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton dot = new JButton(".");
+        dot.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += ".";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         buttonPanel.add(seven);
         buttonPanel.add(eight);
         buttonPanel.add(nine);
-
-        buttonPanel.add(zero);
+        buttonPanel.add(plus);
+        buttonPanel.add(minus);
+        buttonPanel.add(multiply);
+        buttonPanel.add(divide);
+        buttonPanel.add(equal);
         buttonPanel.add(backspace);
-        buttonPanel.add(clear);
+
+        buttonPanel.add(four);
+        buttonPanel.add(five);
+        buttonPanel.add(six);
+        buttonPanel.add(less);
+        buttonPanel.add(larger);
+        buttonPanel.add(lessEqual);
+        buttonPanel.add(largerEqual);
+        buttonPanel.add(power);
+        buttonPanel.add(absolute);
+
+        buttonPanel.add(one);
+        buttonPanel.add(two);
+        buttonPanel.add(three);
+        buttonPanel.add(root);
+        buttonPanel.add(rootOf);
+        buttonPanel.add(leftPar);
+        buttonPanel.add(rightPar);
+        buttonPanel.add(logn);
+        buttonPanel.add(ln);
+
+        buttonPanel.add(dot);
+        buttonPanel.add(zero);
         buttonPanel.add(enter);
+    }
+
+    public void setClip(String name)
+            throws Exception
+    {
+        if (clip != null)
+        {
+            clip.close();
+        }
+        AudioInputStream audioInputStream =
+                AudioSystem.getAudioInputStream(new File("src\\BGM\\" + name));
+        clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
     }
 }
