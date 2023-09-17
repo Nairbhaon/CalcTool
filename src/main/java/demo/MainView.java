@@ -11,6 +11,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 
+import java.util.Locale;
+
 @Route("")
 public class MainView extends VerticalLayout {
     public MainView() {
@@ -94,10 +96,9 @@ public class MainView extends VerticalLayout {
 
         // Initialize all the text fields
         // Equation Input Text Field
-        TextArea equationInputArea = new TextArea("Equation");
+        TextArea equationInputArea = new TextArea("Question");
         equationInputArea.setWidthFull();
-        equationInputArea.setPlaceholder("Please Input your Equation Here");
-        equationInputArea.setTooltipText("Type Equation Here");
+        equationInputArea.setPlaceholder("Please Input Your Question Here");
         equationInputArea.setClearButtonVisible(true);
         equationInputArea.setMinHeight("100px");
         equationInputArea.setMaxHeight("150px");
@@ -118,10 +119,10 @@ public class MainView extends VerticalLayout {
         TextArea equationOutputArea = new TextArea();
         equationOutputArea.setWidthFull();
         equationOutputArea.setLabel("Output");
-        equationOutputArea.setValue("Equation Output Here");
+        equationOutputArea.setValue("Response Will Be Generated Here");
         equationOutputArea.setTooltipText("Click to copy");
-        equationOutputArea.setMinHeight("100px");
-        equationOutputArea.setMaxHeight("150px");
+        equationOutputArea.setMinHeight("300px");
+        equationOutputArea.setMaxHeight("400px");
         equationOutputArea.setReadOnly(true);
 
         //endregion
@@ -135,6 +136,13 @@ public class MainView extends VerticalLayout {
         Button enterPrompt = new Button("Submit!");
         enterPrompt.addClickListener(e ->{
             equationOutputArea.setValue(ChatInterface.explainEquation(token[0], equationString[0]));
+            if (equationString[0].toLowerCase().equals("rickroll") ||
+                    equationString[0].toLowerCase().equals("nggyu") ||
+                    equationString[0].toLowerCase().equals("never gonna give you up") ||
+                    equationString[0].toLowerCase().equals("rick roll"))
+            {
+                getUI().get().getPage().open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+            }
         });
         enterPrompt.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         enterPrompt.addThemeVariants(ButtonVariant.LUMO_LARGE);
@@ -248,43 +256,42 @@ public class MainView extends VerticalLayout {
             equationInputArea.setValue(equationString[0]);
         });
         nthRoot.addClickListener(e -> {
-            switch(equationString[0].charAt(equationString[0].length() - 1))
+            if (equationString[0].isEmpty())
             {
-                case '1':
-                    if (equationString[0].length() > 1)
-                    {
-                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
-                            equationString[0] += "th root of ";
-                        else
+                equationString[0] += "th root of ";
+            }
+            else {
+                switch (equationString[0].charAt(equationString[0].length() - 1)) {
+                    case '1':
+                        if (equationString[0].length() > 1) {
+                            if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                                equationString[0] += "th root of ";
+                            else
+                                equationString[0] += "st root of ";
+                        } else
                             equationString[0] += "st root of ";
-                    }
-                    else
-                        equationString[0] += "st root of ";
-                    break;
-                case '2':
-                    if (equationString[0].length() > 1)
-                    {
-                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
-                            equationString[0] += "th root of ";
-                        else
+                        break;
+                    case '2':
+                        if (equationString[0].length() > 1) {
+                            if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                                equationString[0] += "th root of ";
+                            else
+                                equationString[0] += "nd root of ";
+                        } else
                             equationString[0] += "nd root of ";
-                    }
-                    else
-                        equationString[0] += "nd root of ";
-                    break;
-                case '3':
-                    if (equationString[0].length() > 1)
-                    {
-                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
-                            equationString[0] += "th root of ";
-                        else
+                        break;
+                    case '3':
+                        if (equationString[0].length() > 1) {
+                            if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                                equationString[0] += "th root of ";
+                            else
+                                equationString[0] += "rd root of ";
+                        } else
                             equationString[0] += "rd root of ";
-                    }
-                    else
-                        equationString[0] += "rd root of ";
-                    break;
-                default:
-                    equationString[0] += "th root of ";
+                        break;
+                    default:
+                        equationString[0] += "th root of ";
+                }
             }
 
             equationInputArea.setValue(equationString[0]);
@@ -417,6 +424,8 @@ public class MainView extends VerticalLayout {
             equationString[0] = e.getValue();
             equationInputArea.setValue(equationString[0]);
         });
+
+
 
         // Set component alignment in the vertical layout
         mainContent.setAlignItems(Alignment.CENTER);
