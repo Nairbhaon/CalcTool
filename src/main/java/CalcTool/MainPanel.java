@@ -626,6 +626,379 @@ public class MainPanel extends JPanel
             }
         });
 
+        JButton infinity = new JButton("∞");
+        infinity.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "∞";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton x = new JButton("x");
+        x.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "x";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton y = new JButton("y");
+        y.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "y";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton z = new JButton("z");
+        z.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "z";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton θ = new JButton("θ");
+        θ.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "θ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton modulus = new JButton("%");
+        modulus.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "%";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton sin = new JButton("sin");
+        sin.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "sin";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton cos = new JButton("cos");
+        cos.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "cos";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton tan = new JButton("tan");
+        tan.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "tan";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton sec = new JButton("sec");
+        sec.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "sec";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton csc = new JButton("csc");
+        csc.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "csc";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton cot = new JButton("cot");
+        cot.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "cot";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton defIntegral = new JButton("def∫");
+        defIntegral.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "∫( )dx with bounds () to ()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton indefIntegral = new JButton("indef∫");
+        indefIntegral.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "∫( )dx";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton dydx = new JButton("dydx");
+        dydx.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "dy/dx";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+
+        JButton arcsin = new JButton("arcsin");
+        arcsin.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arcsin";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton arccos = new JButton("arccos");
+        arccos.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arccos";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton arctan = new JButton("arctan");
+        arctan.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arctan";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton arcsec = new JButton("arcsec");
+        arcsec.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arcsec";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton arccsc = new JButton("arccsc");
+        arccsc.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arccsc";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton arccot = new JButton("arccot");
+        arccot.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "arccot";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton limit = new JButton("lim");
+        limit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "lim x → ()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton e = new JButton("e");
+        e.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "e^";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+
+
+
+
         buttonPanel.add(seven);
         buttonPanel.add(eight);
         buttonPanel.add(nine);
@@ -659,6 +1032,31 @@ public class MainPanel extends JPanel
         buttonPanel.add(comma);
         buttonPanel.add(zero);
         buttonPanel.add(dot);
+        buttonPanel.add(infinity);
+        buttonPanel.add(x);
+        buttonPanel.add(y);
+        buttonPanel.add(z);
+        buttonPanel.add(θ);
+        buttonPanel.add(modulus);
+
+        buttonPanel.add(sin);
+        buttonPanel.add(cos);
+        buttonPanel.add(tan);
+        buttonPanel.add(sec);
+        buttonPanel.add(csc);
+        buttonPanel.add(cot);
+        buttonPanel.add(defIntegral);
+        buttonPanel.add(indefIntegral);
+        buttonPanel.add(dydx);
+
+        buttonPanel.add(arcsin);
+        buttonPanel.add(arccos);
+        buttonPanel.add(arctan);
+        buttonPanel.add(arcsec);
+        buttonPanel.add(arccsc);
+        buttonPanel.add(arccot);
+        buttonPanel.add(limit);
+        buttonPanel.add(e);
         buttonPanel.add(enter);
     }
 
