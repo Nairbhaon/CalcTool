@@ -94,7 +94,7 @@ public class MainPanel extends JPanel
                 }
             }
         });
-        clear.setPreferredSize(new Dimension(110, 25));
+        clear.setPreferredSize(new Dimension(110, 24));
         this.add(clear);
 
         JPanel buttonPanel = new JPanel();
