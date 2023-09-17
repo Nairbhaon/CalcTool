@@ -594,6 +594,22 @@ public class MainPanel extends JPanel
             }
         });
 
+        JButton comma = new JButton(",");
+        comma.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += ",";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         JButton dot = new JButton(".");
         dot.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
@@ -640,8 +656,9 @@ public class MainPanel extends JPanel
         buttonPanel.add(logn);
         buttonPanel.add(ln);
 
-        buttonPanel.add(dot);
+        buttonPanel.add(comma);
         buttonPanel.add(zero);
+        buttonPanel.add(dot);
         buttonPanel.add(enter);
     }
 
