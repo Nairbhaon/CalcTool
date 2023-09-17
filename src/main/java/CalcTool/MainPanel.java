@@ -4,16 +4,24 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+/**
+ * Implemented the GUI part of the Math GPT
+ * @author Kenjie DeCastro, Shoyo Ko, Yichen Hu, Nairbhaon Durand
+ * @version 9/16/2023
+ */
 public class MainPanel extends JPanel
 {
     private String inputMessage = "";
@@ -386,9 +394,25 @@ public class MainPanel extends JPanel
                     {
                         output.setText("No input received");
                     }
+                    else if (inputMessage.toUpperCase().equals("RICKROLL") ||
+                            inputMessage.toUpperCase().equals("NEVER GONNA GIVE YOU UP") ||
+                            inputMessage.toUpperCase().equals("NGGYU") ||
+                            inputMessage.toUpperCase().equals("RICK ROLL"))
+                    {
+                        openURL("https://www.youtube.com/watch?v=xvFZjo5PgG0");
+                        System.exit(0);
+                    }
+                    else if (inputMessage.toUpperCase().equals("JINITAIMEI") ||
+                            inputMessage.toUpperCase().equals("JI NI TAI MEI") ||
+                            inputMessage.toUpperCase().equals("JNTM") ||
+                            inputMessage.toUpperCase().equals("CXK"))
+                    {
+                        openURL("https://www.youtube.com/watch?v=FrMMQW0fygo");
+                        System.exit(0);
+                    }
                     else if (token.isEmpty())
                     {
-                        output.setText("No Token received");
+                        output.setText("No API key received");
                     }
                     else
                     {
@@ -426,7 +450,44 @@ public class MainPanel extends JPanel
             {
                 try
                 {
-                    inputMessage += " root of ";
+                    if(inputMessage.isEmpty())
+                    {
+                        inputMessage += " th root of ";
+                    }
+                    else
+                    {
+                        switch(inputMessage.charAt(inputMessage.length() - 1)) {
+                            case '1':
+                                if (inputMessage.length() > 1) {
+                                    if (inputMessage.charAt(inputMessage.length() - 2) == '1')
+                                        inputMessage += "th root of ";
+                                    else
+                                        inputMessage += "st root of ";
+                                } else
+                                    inputMessage += "st root of ";
+                                break;
+                            case '2':
+                                if (inputMessage.length() > 1) {
+                                    if (inputMessage.charAt(inputMessage.length() - 2) == '1')
+                                        inputMessage += "th root of ";
+                                    else
+                                        inputMessage += "nd root of ";
+                                } else
+                                    inputMessage += "nd root of ";
+                                break;
+                            case '3':
+                                if (inputMessage.length() > 1) {
+                                    if (inputMessage.charAt(inputMessage.length() - 2) == '1')
+                                        inputMessage += "th root of ";
+                                    else
+                                        inputMessage += "rd root of ";
+                                } else
+                                    inputMessage += "rd root of ";
+                                break;
+                            default:
+                                inputMessage += "th root of ";
+                        }
+                    }
                     input.setText(inputMessage);
                 }
                 catch (Exception e1)
@@ -862,14 +923,14 @@ public class MainPanel extends JPanel
             }
         });
 
-        JButton defIntegral = new JButton("def∫");
+        JButton defIntegral = new JButton("def ∫");
         defIntegral.setFont(new Font("Tahoma", Font.BOLD, 17));
         defIntegral.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 try
                 {
-                    inputMessage += " ∫( )dx with bounds () to () ";
+                    inputMessage += " ∫()dx with bounds () to () ";
                     input.setText(inputMessage);
                 }
                 catch (Exception e1)
@@ -879,14 +940,14 @@ public class MainPanel extends JPanel
             }
         });
 
-        JButton indefIntegral = new JButton("indef∫");
-        indefIntegral.setFont(new Font("Tahoma", Font.BOLD, 15));
+        JButton indefIntegral = new JButton("indef ∫");
+        indefIntegral.setFont(new Font("Tahoma", Font.BOLD, 14));
         indefIntegral.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 try
                 {
-                    inputMessage += " ∫( )dx ";
+                    inputMessage += " ∫()dx ";
                     input.setText(inputMessage);
                 }
                 catch (Exception e1)
@@ -903,7 +964,7 @@ public class MainPanel extends JPanel
             {
                 try
                 {
-                    inputMessage += " dy/dx ";
+                    inputMessage += " dy/dx()";
                     input.setText(inputMessage);
                 }
                 catch (Exception e1)
@@ -1050,7 +1111,158 @@ public class MainPanel extends JPanel
             }
         });
 
+        JButton pi = new JButton("\u03C0");
+        pi.setFont(new Font("Times New Roman", Font.BOLD, 17));
+        pi.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u03C0 ";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
+        JButton sum = new JButton("\u2211");
+        sum.setFont(new Font("Tahoma", Font.BOLD, 17));
+        sum.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u2211 () from () to ()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton partialDev = new JButton("\u2202");
+        partialDev.setFont(new Font("Tahoma", Font.BOLD, 17));
+        partialDev.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u2202/\u2202x()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton doubleDefInt = new JButton("def \u222B\u222B");
+        doubleDefInt.setFont(new Font("Tahoma", Font.BOLD, 16));
+        doubleDefInt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u222C()dxdy from () to () and () to ()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton doubleInt = new JButton("indef \u222B\u222B");
+        doubleInt.setFont(new Font("Tahoma", Font.BOLD, 12));
+        doubleInt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "\u222C()dxdy";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton tripleDefInt = new JButton("def \u222B\u222B\u222B");
+        tripleDefInt.setFont(new Font("Tahoma", Font.BOLD, 12));
+        tripleDefInt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u222D()dxdydz from () to () and () to ()";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton tripleInt = new JButton("indef \u222B\u222B\u222B");
+        tripleInt.setFont(new Font("Tahoma", Font.BOLD, 10));
+        tripleInt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += " \u222D()dxdydz";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton twoDVec = new JButton("( , )");
+        twoDVec.setFont(new Font("Tahoma", Font.BOLD, 10));
+        twoDVec.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "( , )";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        JButton threeDVec = new JButton("( , , )");
+        threeDVec.setFont(new Font("Tahoma", Font.BOLD, 10));
+        threeDVec.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    inputMessage += "( , , )";
+                    input.setText(inputMessage);
+                }
+                catch (Exception e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         buttonPanel.add(seven);
         buttonPanel.add(eight);
@@ -1100,16 +1312,26 @@ public class MainPanel extends JPanel
         buttonPanel.add(cot);
         buttonPanel.add(defIntegral);
         buttonPanel.add(indefIntegral);
-        buttonPanel.add(dydx);
+        buttonPanel.add(doubleDefInt);
 
+        buttonPanel.add(doubleInt);
+        buttonPanel.add(tripleDefInt);
+        buttonPanel.add(tripleInt);
+        buttonPanel.add(dydx);
+        buttonPanel.add(partialDev);
         buttonPanel.add(arcsin);
         buttonPanel.add(arccos);
         buttonPanel.add(arctan);
         buttonPanel.add(arcsec);
+
         buttonPanel.add(arccsc);
         buttonPanel.add(arccot);
         buttonPanel.add(limit);
         buttonPanel.add(e);
+        buttonPanel.add(pi);
+        buttonPanel.add(twoDVec);
+        buttonPanel.add(threeDVec);
+        buttonPanel.add(sum);
         buttonPanel.add(enter);
     }
 
@@ -1121,9 +1343,21 @@ public class MainPanel extends JPanel
             clip.close();
         }
         AudioInputStream audioInputStream =
-                AudioSystem.getAudioInputStream(new File("src\\BGM\\" + name));
+                AudioSystem.getAudioInputStream(new File("src\\Troll\\" + name));
         clip = AudioSystem.getClip();
         clip.open(audioInputStream);
         clip.start();
+    }
+
+    public void openURL(String url)
+    {
+        try
+        {
+            Desktop.getDesktop().browse(new URL(url).toURI());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
