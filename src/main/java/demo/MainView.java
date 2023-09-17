@@ -94,10 +94,9 @@ public class MainView extends VerticalLayout {
 
         // Initialize all the text fields
         // Equation Input Text Field
-        TextArea equationInputArea = new TextArea("Equation");
+        TextArea equationInputArea = new TextArea("Question");
         equationInputArea.setWidthFull();
-        equationInputArea.setPlaceholder("Please Input your Equation Here");
-        equationInputArea.setTooltipText("Type Equation Here");
+        equationInputArea.setPlaceholder("Please Input Your Question Here");
         equationInputArea.setClearButtonVisible(true);
         equationInputArea.setMinHeight("100px");
         equationInputArea.setMaxHeight("150px");
@@ -118,10 +117,10 @@ public class MainView extends VerticalLayout {
         TextArea equationOutputArea = new TextArea();
         equationOutputArea.setWidthFull();
         equationOutputArea.setLabel("Output");
-        equationOutputArea.setValue("Equation Output Here");
+        equationOutputArea.setValue("Response Will Be Generated Here");
         equationOutputArea.setTooltipText("Click to copy");
-        equationOutputArea.setMinHeight("100px");
-        equationOutputArea.setMaxHeight("150px");
+        equationOutputArea.setMinHeight("300px");
+        equationOutputArea.setMaxHeight("400px");
         equationOutputArea.setReadOnly(true);
 
         //endregion
