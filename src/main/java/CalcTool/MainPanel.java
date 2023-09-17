@@ -43,8 +43,9 @@ public class MainPanel extends JPanel
 
         //input
         JTextArea input = new JTextArea("");
+        input.setFont(input.getFont().deriveFont(15f));
         input.setEditable(true);
-        input.setPreferredSize(new Dimension(640, 20));
+        input.setPreferredSize(new Dimension(640, 25));
         input.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(input);
 
@@ -93,7 +94,7 @@ public class MainPanel extends JPanel
                 }
             }
         });
-        clear.setPreferredSize(new Dimension(110, 20));
+        clear.setPreferredSize(new Dimension(110, 25));
         this.add(clear);
 
         JPanel buttonPanel = new JPanel();
