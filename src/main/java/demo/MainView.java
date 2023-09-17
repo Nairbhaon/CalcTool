@@ -248,7 +248,45 @@ public class MainView extends VerticalLayout {
             equationInputArea.setValue(equationString[0]);
         });
         nthRoot.addClickListener(e -> {
-            equationString[0] += " root of ";
+            switch(equationString[0].charAt(equationString[0].length() - 1))
+            {
+                case '1':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "st root of ";
+                    }
+                    else
+                        equationString[0] += "st root of ";
+                    break;
+                case '2':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "nd root of ";
+                    }
+                    else
+                        equationString[0] += "nd root of ";
+                    break;
+                case '3':
+                    if (equationString[0].length() > 1)
+                    {
+                        if (equationString[0].charAt(equationString[0].length() - 2) == '1')
+                            equationString[0] += "th root of ";
+                        else
+                            equationString[0] += "rd root of ";
+                    }
+                    else
+                        equationString[0] += "rd root of ";
+                    break;
+                default:
+                    equationString[0] += "th root of ";
+            }
+
             equationInputArea.setValue(equationString[0]);
         });
         power.addClickListener(e -> {
