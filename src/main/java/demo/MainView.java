@@ -76,9 +76,15 @@ public class MainView extends VerticalLayout {
 
         // Derivative & Integral
         var derivative = new Button("dy/dx");
+        var partialDerivative = new Button("∂");
         var defIntegral = new Button("def∫");
+        var defDoubleIntegral = new Button("def∬");
+        var defTripleIntegral = new Button("def∭");
         var indefIntegral = new Button("indef∫");
+        var indefDoubleIntegral = new Button("indef∬");
+        var indefTripleIntegral = new Button("indef∭");
         var limit = new Button("lim");
+        var sigma = new Button("Σ");
 
         // Logarithms
         var log = new Button("log");
@@ -93,6 +99,8 @@ public class MainView extends VerticalLayout {
         var infinity = new Button("∞");
         var percent = new Button("%");
         var backspace = new Button("⌫");
+        var orderPair = new Button("(,)");
+        var threeDimensionalPair = new Button("(,,)");
 
         // Initialize all the text fields
         // Equation Input Text Field
@@ -158,8 +166,9 @@ public class MainView extends VerticalLayout {
         HorizontalLayout inputFieldLineTwo = new HorizontalLayout(four, five, six, less, greater, lessEqual, greaterEqual, power, abs);
         HorizontalLayout inputFieldLineThree = new HorizontalLayout(one, two, three, sqrt, nthRoot, frontPar, backPar, log, ln);
         HorizontalLayout inputFieldLineFour = new HorizontalLayout(comma, zero, period, infinity, x, y, z, theta, percent);
-        HorizontalLayout inputFieldLineFive = new HorizontalLayout(sin, cos, tan, sec, csc, cot, defIntegral, indefIntegral, derivative);
-        HorizontalLayout inputFieldLineSix = new HorizontalLayout(arcsin, arccos, arctan, arcsec, arccsc, arccot, limit, euler, pi);
+        HorizontalLayout inputFieldLineFive = new HorizontalLayout(sin, cos, tan, sec, csc, cot, defIntegral, indefIntegral, defDoubleIntegral);
+        HorizontalLayout inputFieldLineSix = new HorizontalLayout(arcsin, arccos, arctan, arcsec, arccsc, arccot, indefDoubleIntegral, defTripleIntegral, indefTripleIntegral);
+        HorizontalLayout inputFieldLineSeven = new HorizontalLayout(limit, euler, pi, sigma, orderPair, threeDimensionalPair, derivative, partialDerivative);
         HorizontalLayout tokenInput = new HorizontalLayout(tokenInputArea);
         tokenInput.setWidthFull();
         HorizontalLayout equationOutput = new HorizontalLayout(equationOutputArea);
@@ -416,6 +425,39 @@ public class MainView extends VerticalLayout {
             equationString[0] += "%";
             equationInputArea.setValue(equationString[0]);
         });
+        partialDerivative.addClickListener(e -> {
+            equationString[0] += "∂";
+            equationInputArea.setValue(equationString[0]);
+        });
+        defDoubleIntegral.addClickListener(e -> {
+            equationString[0] += "∬( )dxdy with bounds () to () and () to ()";
+            equationInputArea.setValue(equationString[0]);
+        });
+        indefDoubleIntegral.addClickListener(e -> {
+            equationString[0] += "∬( )dxdy";
+            equationInputArea.setValue(equationString[0]);
+        });
+        indefDoubleIntegral.setMaxWidth("85px");
+        defTripleIntegral.addClickListener(e -> {
+            equationString[0] += "∭( )dxdydz with bounds () to () and () to ()";
+            equationInputArea.setValue(equationString[0]);
+        });
+        indefTripleIntegral.addClickListener(e -> {
+            equationString[0] += "∭( )dxdydz";
+            equationInputArea.setValue(equationString[0]);
+        });
+        sigma.addClickListener(e -> {
+            equationString[0] += "Σ( ) from () to ()";
+            equationInputArea.setValue(equationString[0]);
+        });
+        orderPair.addClickListener(e -> {
+            equationString[0] += "( , )";
+            equationInputArea.setValue(equationString[0]);
+        });
+        threeDimensionalPair.addClickListener(e -> {
+            equationString[0] += "( , , )";
+            equationInputArea.setValue(equationString[0]);
+        });
 
         //endregion
 
@@ -425,13 +467,10 @@ public class MainView extends VerticalLayout {
             equationInputArea.setValue(equationString[0]);
         });
 
-
-
         // Set component alignment in the vertical layout
         mainContent.setAlignItems(Alignment.CENTER);
         mainContent.add(title);
-        mainContent.add(equationInput, inputFieldLineOne, inputFieldLineTwo, inputFieldLineThree, inputFieldLineFour, inputFieldLineFive, inputFieldLineSix, tokenInput, equationOutput);
-
+        mainContent.add(equationInput, inputFieldLineOne, inputFieldLineTwo, inputFieldLineThree, inputFieldLineFour, inputFieldLineFive, inputFieldLineSix, inputFieldLineSeven, tokenInput, equationOutput);
 
         add(mainContent);
 
